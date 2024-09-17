@@ -1,0 +1,128 @@
+{% extends 'titi/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+  <div class="text-center">
+    <h1 class="mt-5">Préparation d'un évènement en cours, revenez pour la réservation !!!!!!</h1>
+  </div>
+</div>
+
+<!--
+<div class="container mt-5">
+    <h2 class="text-center text-primary custom-title">Réservation de ticket pour les évènements</h2>
+    <form method="post" action="{% url 'ticket_view' %}">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="id_name" class="form-label">Votre Nom et Prénom(s)</label>
+                <input type="text" name="name" id="id_name" class="form-control{% if form.name.errors %} is-invalid{% endif %}">
+                {% if form.name.errors %}
+                    <div class="text-danger">{{ form.name.errors }}</div>
+                {% endif %}
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="id_phone_number" class="form-label">Votre Numéro de Téléphone (international)</label>
+                <input type="tel" name="phone_number" id="id_phone_number" class="form-control{% if form.phone_number.errors %} is-invalid{% endif %}" placeholder="+225XXXXXXXXXX" maxlength="14" minlength="14" oninput="updateCharCount()">
+                <div id="phoneNumberCount" class="text-muted">Il reste <span id="remainingCount">14</span> chiffres.</div>
+                {% if form.phone_number.errors %}
+                    <div class="text-danger">{{ form.phone_number.errors|first }}</div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="id_email" class="form-label">Votre Email</label>
+                <input type="email" name="email" id="id_email" class="form-control{% if form.email.errors %} is-invalid{% endif %}">
+                {% if form.email.errors %}
+                    <div class="text-danger">{{ form.email.errors }}</div>
+                {% endif %}
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="id_ticket_quantity" class="form-label">Nombre de Billets</label>
+                <input type="number" name="ticket_quantity" id="id_ticket_quantity" class="form-control{% if form.ticket_quantity.errors %} is-invalid{% endif %}" value="{{ form.ticket_quantity.value }}" min="1">
+                {% if form.ticket_quantity.errors %}
+                    <div class="text-danger">{{ form.ticket_quantity.errors }}</div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="id_message" class="form-label">Message (optionnel)</label>
+            <textarea name="message" id="id_message" class="form-control">{{ form.message.value }}</textarea>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary"><i class="fas fa-ticket-alt"></i> Réserver</button>
+        </div>
+    </form>
+</div>
+<br>
+
+{% if success %}
+<!-- Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">Félicitations, {{ name }}!</h5>
+            </div>
+            <div class="modal-body">
+                Vous avez fait la réservation de {{ ticket_quantity }} ticket(s).<br> 
+                Votre réservation a été prise en compte. Merci, {{ name }}.<br>
+                Nous vous contacterons au {{ phone_number }} pour plus de détails.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="modalOkButton">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+-->
+<script>
+    // Show the modal when the page loads
+    window.onload = function() {
+        var successModal = new bootstrap.Modal(document.getElementById('successModal'));
+        successModal.show();
+    }
+
+    // Redirect to the home page when "OK" is clicked
+    document.getElementById('modalOkButton').onclick = function() {
+        window.location.href = "{% url 'home' %}";
+        document.querySelector('form').reset(); // Réinitialise le formulaire
+    }
+</script>
+{% endif %}
+<div><h3> Aucun évènements en cours</h3></div>
+
+<script>
+    function updateCharCount() {
+        var input = document.getElementById("id_phone_number");
+        var remainingCount = 14 - input.value.length; // Calculer le nombre de caractères restants
+        document.getElementById("remainingCount").textContent = remainingCount; // Mettre à jour le nombre affiché
+
+        // Validation côté client
+        if (input.value.length === 14 && !/^\+225\d{10}$/.test(input.value)) {
+            input.setCustomValidity("Veuillez entrer un numéro de téléphone valide au format +225XXXXXXXXXX.");
+        } else {
+            input.setCustomValidity("");
+        }
+    }
+</script>
+
+<style>
+    .custom-title {
+        color: #007bff; /* Couleur du texte */
+        font-size: 2.5rem; /* Taille du texte */
+        margin-bottom: 30px; /* Marge en dessous du titre */
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Ombre pour le texte */
+    }
+    .text-danger {
+        font-size: 0.9rem; /* Taille de police plus petite pour les messages d'erreur */
+    }
+    .is-invalid {
+        border-color: #dc3545; /* Couleur de bordure rouge pour les champs invalides */
+    }
+    body {
+        background-color: #f8f9fa; /* Couleur de fond légère */
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,104 @@
+{% extends 'titi/base.html' %}
+{% load static %}
+
+{% block content %}
+<br><br>
+<div class="container mt-5">
+    <div class="row">
+        <!-- Image et détails du produit à gauche -->
+        <div class="col-md-6">
+            <div class="card h-100 shadow-sm">
+                <img src="{{ produit.image.url }}" class="card-img-top" alt="{{ produit.nom }}">
+                <div class="card-body">
+                    <h4 class="card-title-center">{{ produit.nom }}</h4>
+                    <span class="badge bg-success mb-3">Prix : {{ produit.prix }}€</span>
+                    <p class="card-text">Description : {{ produit.description }}</p>
+                    <p class="card-text">Code du produit : {{ produit.code }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Formulaire à droite -->
+        <div class="col-md-6">
+            <h3>Informations du Client pour la commande</h3>
+            <form method="POST" action="{% url 'acheter' produit.id %}">
+                {% csrf_token %}
+                
+                <div class="form-group mb-3">
+                    <label for="nom">Nom</label>
+                    <input type="text" class="form-control" id="nom" name="nom" required>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="prenoms">Prénoms</label>
+                    <input type="text" class="form-control" id="prenoms" name="prenoms" required>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="numero">Numéro de téléphone</label>
+                    <input type="tel" class="form-control" id="numero" name="numero" required>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="quantite">Quantité</label>
+                    <input type="number" class="form-control" id="quantite" name="quantite" min="1" value="1" required>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="lieu_livraison">Lieu de livraison</label>
+                    <input type="text" class="form-control" id="lieu_livraison" name="lieu_livraison" required>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label>Prix unitaire</label>
+                    <input type="text" class="form-control" value="{{ produit.prix }}€" readonly>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label>Prix total</label>
+                    <input type="text" class="form-control" id="prix_total" value="{{ produit.prix }}€" readonly>
+                </div>
+
+                <!-- Checkbox pour confirmer la commande -->
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" id="confirmer_commande" name="confirmer_commande" required>
+                    <label class="form-check-label" for="confirmer_commande">
+                        Je confirme que je suis prêt à faire une commande
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-success btn-block">Commander maintenant</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Script pour calculer le prix total en fonction de la quantité
+    document.getElementById('quantite').addEventListener('input', function() {
+        const quantite = parseInt(this.value);
+        const prixUnitaire = parseFloat("{{ produit.prix }}");
+        const prixTotal = quantite * prixUnitaire;
+        document.getElementById('prix_total').value = prixTotal.toFixed(2) + '€';
+    });
+
+    // Fonction pour capitaliser la première lettre de chaque mot
+    function capitalizeFirstLetter(value) {
+        return value.replace(/\b\w/g, function(char) {
+            return char.toUpperCase();
+        });
+    }
+
+    // Appliquer la capitalisation sur les champs "Nom" et "Prénoms"
+    document.getElementById('nom').addEventListener('input', function() {
+        this.value = capitalizeFirstLetter(this.value);
+    });
+
+    document.getElementById('prenoms').addEventListener('input', function() {
+        this.value = capitalizeFirstLetter(this.value);
+    });
+</script>
+
+{% endblock %}
+
+

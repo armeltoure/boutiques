@@ -1,0 +1,167 @@
+{% extends 'titi/base.html' %}
+
+{% block content %}
+<br><br>
+<div class="container mt-5">
+    <table class="table">
+        <h3>Liste des commandes</h3>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Prénoms</th>
+                <th>Numéro</th>
+                <th>Produit</th>
+                <th>Prix unitaire</th>
+                <th>Quantité</th>
+                <th>Prix total</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for commande in commandes %}
+            <tr id="commande-{{ commande.id }}">
+                <td>{{ commande.id }}</td>
+                <td>{{ commande.nom }}</td>
+                <td>{{ commande.prenoms }}</td>
+                <td>{{ commande.numero }}</td>
+                <td>{{ commande.produit.nom }}</td>
+                <td>{{ commande.produit.prix }}€</td>
+                <td>{{ commande.quantite }}</td>
+                <td>{{ commande.prix_total }}€</td>
+                <td>
+                    <div class="d-flex align-items-center">
+                        <button class="btn status-button" 
+                                data-id="{{ commande.id }}" 
+                                data-status="{{ commande.status }}">
+                            {% if commande.status == 'Livré' %}
+                                Livré
+                            {% elif commande.status == 'En cours' %}
+                                En cours
+                            {% else %}
+                                Contacter
+                            {% endif %}
+                        </button>
+                        {% if commande.status == 'Livré' %}
+                        <button class="btn btn-danger btn-sm ml-2 delete-button" 
+                                data-id="{{ commande.id }}">
+                            Supprimer
+                        </button>
+                        {% else %}
+                        <button class="btn btn-danger btn-sm ml-2 delete-button" 
+                                data-id="{{ commande.id }}" 
+                                style="display: none;">
+                            Supprimer
+                        </button>
+                        {% endif %}
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<style>
+    .status-button {
+        font-weight: bold;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+    }
+    .status-button.Contacter {
+        background-color: #007bff; /* Blue for 'Contacter' */
+    }
+    .status-button.En-cours {
+        background-color: #ffc107; /* Yellow for 'En cours' */
+    }
+    .status-button.Livré {
+        background-color: #28a745; /* Green for 'Livré' */
+        cursor: not-allowed;
+    }
+    .delete-button {
+        display: none; /* Initially hidden */
+    }
+    .delete-button.show {
+        display: inline-block; /* Show when status is 'Livré' */
+    }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const statusButtons = document.querySelectorAll('.status-button');
+    const deleteButtons = document.querySelectorAll('.delete-button');
+
+    statusButtons.forEach(button => {
+        const status = button.dataset.status;
+        button.classList.add(status.replace(' ', '-'));
+
+        button.addEventListener('click', function() {
+            const id = this.dataset.id;
+            let currentStatus = this.dataset.status;
+            let nextStatus = '';
+
+            if (currentStatus === 'Contacter') {
+                nextStatus = 'En cours';
+            } else if (currentStatus === 'En cours') {
+                nextStatus = 'Livré';
+            }
+
+            if (nextStatus) {
+                fetch(`/update_status/${id}/${nextStatus}/`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        button.textContent = nextStatus;
+                        button.dataset.status = nextStatus;
+                        button.classList.remove(currentStatus.replace(' ', '-'));
+                        button.classList.add(nextStatus.replace(' ', '-'));
+
+                        if (nextStatus === 'Livré') {
+                            button.disabled = true;
+                            // Show delete button
+                            const deleteButton = button.nextElementSibling;
+                            deleteButton.style.display = 'inline-block';
+                        }
+                    } else {
+                        console.log('Failed to update status');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            }
+        });
+    });
+
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const id = this.dataset.id;
+
+            fetch(`/delete_command/${id}/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Remove the row from the table
+                    const row = document.getElementById(`commande-${id}`);
+                    row.remove();
+                } else {
+                    console.log('Failed to delete command');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    });
+});
+</script>
+{% endblock %}

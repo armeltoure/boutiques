@@ -1,0 +1,44 @@
+{% extends 'titi/base.html' %}
+
+{% block content %}
+<!-- Contenu principal -->
+<section class="container mt-5">
+  <!-- Modale de confirmation -->
+  <div class="modal fade show" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true" style="display:block;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="confirmationModalLabel">Rendez-vous Confirmé</h5>
+        </div>
+        <div class="modal-body">
+          <p><strong>Nom :</strong> {{ nom }}</p>
+          <p><strong>Date :</strong> {{ date }}</p>
+          <p><strong>Heure :</strong> {{ heure }}</p>
+          <p><strong>Service :</strong> {{ service }}</p>
+          <p><strong>Tarif :</strong> €{{ tarif }}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="closeModal">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  // Redirection à la fermeture du modal
+  document.getElementById('closeModal').addEventListener('click', function() {
+    window.location.href = "{% url 'home' %}";
+  });
+
+  // Redirection automatique après la fermeture du modal
+  window.onload = function() {
+    setTimeout(function(){
+      window.location.href = "{% url 'home' %}";
+    }, 5000);  // Redirige après 5 secondes
+  };
+</script>
+{% endblock %}

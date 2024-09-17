@@ -1,0 +1,33 @@
+{% extends 'titi/base.html' %}
+{% block content %}
+<br><br>
+<div class="container mt-5">
+    <h2 style="color: black;">Liste des Notifications</h2>
+    <p class="text-end" style="color: black;">Nombre de notifications : {{ notifications.count }}</p>
+    <table class="table mt-3">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Date de création</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for notification in notifications %}
+            <tr>
+                <td>{{ notification.name }}</td>
+                <td>{{ notification.email }}</td>
+                <td>{{ notification.created_at }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">Aucune notification</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="text-center mt-4">
+        <a href="{% url 'export_notifications' %}" class="btn btn-primary">Exporter en Excel</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'titi/base.html' %}
+{% load static %}
+
+{% block content %}<br><br>
+<div class="container mt-5">
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <h4 class="alert-heading">Commande Confirmée !</h4>
+        <p class="mb-0">Merci pour votre commande, <strong>{{ commande.nom }} {{ commande.prenoms }}</strong>.</p>
+        <p>Votre commande a été enregistrée avec succès. Vous serez contacté sur le {{commande.numero}} pour votre livraison.</p>
+        <hr>
+        <p class="mb-0">Détails de la commande :</p>
+        <div class="card mt-3">
+            <div class="card-body">
+                <ul class="list-unstyled">
+                    <li><strong>Produit :</strong> {{ commande.produit.nom }}</li>
+                    <li><strong>Code du produit :</strong> {{ commande.produit.code }}</li>
+                    <li><strong>Prix unitaire :</strong> {{ commande.produit.prix }}€</li>
+                    <li><strong>Quantité :</strong> {{ commande.quantite }}</li>
+                    <li><strong>Prix total :</strong> {{ commande.prix_total }}€</li>
+                    <li><strong>Lieu de livraison :</strong> {{ commande.lieu_livraison }}</li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+        <a href="{% url 'home' %}" class="btn btn-primary mt-3">Retour à l'accueil</a>
+    </div>
+</div>
+{% endblock %}
+

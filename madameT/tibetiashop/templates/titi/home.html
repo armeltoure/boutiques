@@ -1,0 +1,280 @@
+{% extends 'titi/base.html' %}
+
+{% block content %}
+
+{% load static %}
+  <main id="main">
+
+    <!-- ======= Hero Slider Section ======= -->
+    <section id="hero-slider" class="hero-slider">
+      <div class="container-md" data-aos="fade-in">
+        <div class="row">
+          <div class="col-12">
+            <div class="swiper sliderFeaturedPosts">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                 <a href="#" class="img-bg d-flex align-items-center justify-content-center text-center" style="background-image: url('{% static 'assets/img/slide1.jpg' %}');">
+                    <div class="img-bg-inner">
+                      <h2>la confiance en soi</h2>
+                      <p>L'élégance est autant une question d'attitude que d'apparence. Une personne qui se tient droite, qui marche avec assurance et qui assume son style, dégage une élégance naturelle. La confiance en soi sublime n'importe quelle tenue.</p>
+                    </div>
+                  </a>
+                </div>
+
+                <div class="swiper-slide">
+                  <a href="#" class="img-bg d-flex align-items-center justify-content-center text-center" style="background-image: url('{% static 'assets/img/slide2.jpg' %}');">
+                    <div class="img-bg-inner">
+                      <h2> La Cohérence</h2>
+                      <p>Un style élégant est cohérent, avec des éléments qui se complètent sans se concurrencer. Cela inclut l'harmonie des couleurs, des textures et des accessoires, ainsi que la coordination entre les vêtements et l'occasion ou le contexte.</p>
+                    </div>
+                  </a>
+                </div>
+<div class="swiper-slide">
+  <a href="#" class="img-bg d-flex align-items-center justify-content-center text-center" style="background-image: url('{% static 'assets/img/slide3.jpg' %}');">
+    <div class="img-bg-inner">
+      <h2>La Simplicité</h2>
+      <p>L'élégance réside souvent dans la simplicité. Éviter les excès, que ce soit dans les motifs, les accessoires ou les couleurs, permet de créer un look épuré et sophistiqué. Le minimalisme est une clé de l'élégance.</p>
+    </div>
+  </a>
+</div>
+
+
+                <div class="swiper-slide">
+                  <a href="#" class="img-bg d-flex align-items-center justify-content-center text-center" style="background-image: url(' {% static 'assets/img/slide16.jpeg' %}');">
+                    <div class="img-bg-inner">
+                      <h2> La Qualité</h2>
+                      <p>La qualité des matériaux et des vêtements contribue largement à l'élégance. Des tissus de qualité, bien coupés et bien ajustés, sont essentiels pour une apparence raffinée. Investir dans des pièces intemporelles et bien faites est un pilier de l'élégance.</p>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="custom-swiper-button-next">
+                <span class="bi-chevron-right"></span>
+              </div>
+              <div class="custom-swiper-button-prev">
+                <span class="bi-chevron-left"></span>
+              </div>
+
+              <div class="swiper-pagination"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- End Hero Slider Section -->
+
+    <!-- ======= Post Grid Section ======= -->
+    <section id="posts" class="posts">
+      <div class="container" data-aos="fade-up">
+        <div class="row g-5">
+          <div class="col-lg-4">
+            <div class="post-entry-1 lg">
+              <a href="#"><img src="{% static 'assets/img/garde robe.jpg' %}" alt="" class="img-fluid"></a>
+              <div class="post-meta"><span class="date"></span> <span class="mx-1">&bullet;</span> <span></span></div>
+              <h2><a href="#">La garde robe, un look coloré pour être élegante</a></h2>
+              <p class="mb-4 d-block">Le thème "La garde-robe de maman, un look coloré pour être élégant" explore l'idée que la mode parentale peut être à la fois pratique et élégante, tout en intégrant des couleurs vives et des motifs. La garde-robe de maman ne doit pas être monotone ; au contraire, elle peut refléter une personnalité dynamique et joyeuse.</p>
+
+              
+            </div>
+
+          </div>
+
+          <div class="col-lg-8">
+            <div class="row g-5">
+              <div class="col-lg-4 border-start custom-border">
+                <div class="post-entry-1">
+                  <a href="#"><img src="{% static 'assets/img/classique.jpeg' %}" alt="" class="img-fluid"></a>
+                  
+                  <h2><a href="#">Inspiration des styles classiques</a></h2>
+                   
+                </div>
+                <div class="post-entry-1">
+                  <a href="#"><img src="{% static 'assets/img/classique.jpeg' %}" alt="" class="img-fluid"></a>
+                  
+                  <h2><a href="#">Couleurs vives et motifs </a></h2>
+                  
+                </div>
+                <div class="post-entry-1">
+                  <a href="#"><img src="{% static 'assets/img/accessoires.jpeg' %}" alt="" class="img-fluid"></a>
+                  
+                  <h2><a href="#">Accessoires coordonnés</a></h2>
+                  
+                </div>
+              </div>
+              <div class="col-lg-4 border-start custom-border">
+                <div class="post-entry-1">
+                  <a href="#"><img src="{% static 'assets/img/post-landscape-3.jpg' %}" alt="" class="img-fluid"></a>
+                  
+                  <h2><a href="#">Confort et praticité</a></h2>
+                  
+                </div>
+                <div class="post-entry-1">
+                  <a href="#"><img src="{% static 'assets/img/post-landscape-6.jpg' %}" alt="" class="img-fluid"></a>
+                  
+                  <h2><a href="#">Confiance en soi</a></h2>
+                  
+                </div>
+                <div class="post-entry-1">
+                  <a href="#"><img src="{% static 'assets/img/post-landscape-8.jpg' %}" alt="" class="img-fluid"></a>
+                  
+                  <h2><a href="#">Opter pour un dressing sobre mais élégant</a></h2>
+                 
+                </div>
+              </div>
+
+              <!-- Trending Section -->
+              <div class="col-lg-4">
+
+                <div class="trending">
+                  <h3>Conseils par MadameT</h3>
+                  <ul class="trending-post">
+                    <li>
+                      <a href="single-post.html">
+                        <span class="number">1</span>
+                        <h3>La garde-robe de maman s'inspire souvent de pièces intemporelles qui peuvent être modernisées avec des touches de couleur. </h3>
+                        <span class="author">MadameT</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="single-post.html">
+                        <span class="number">2</span>
+                        <h3>Les vêtements bien coupés, comme les robes midi, les blazers et les pantalons chics, peuvent être associés à des teintes vives pour créer un look frais et contemporain.</h3>
+                        <span class="author">MadameT</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="single-post.html">
+                        <span class="number">3</span>
+                        <h3>L'utilisation de couleurs audacieuses et de motifs peut égayer une tenue tout en ajoutant une touche de personnalité.</h3>
+                        <span class="author">MadameT</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="single-post.html">
+                        <span class="number">4</span>
+                        <h3>Les fleurs, les rayures ou les imprimés géométriques peuvent être intégrés à la garde-robe pour apporter une dimension ludique et élégante.</h3>
+                        <span class="author">MadameT</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="single-post.html">
+                        <span class="number">5</span>
+                        <h3>Les accessoires jouent un rôle clé dans l'élégance d'un look coloré. Des sacs, des chaussures et des bijoux dans des teintes complémentaires ou contrastées peuvent rehausser l'ensemble et ajouter une touche de sophistication.</h3>
+                        <span class="author">MadameT</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+
+              </div> <!-- End Trending Section -->
+            </div>
+          </div>
+
+        </div> <!-- End .row -->
+      </div>
+    </section> 
+    <main>
+        <!-- Section pour afficher le message de félicitation -->
+        <div id="successMessage" class="alert alert-success text-center" style="display: none; background-color: lightgreen;">
+            Félicitations, vos informations ont été soumises avec succès !
+        </div>
+
+        <!-- Modal pour demander le nom et l'email -->
+        <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content" style="background: rgba(255, 255, 255, 0.8);">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="infoModalLabel">Entrez vos informations</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="infoForm">
+                            <div class="mb-3">
+                                <label for="nameInput" class="form-label">Nom</label>
+                                <input type="text" class="form-control" id="nameInput" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="emailInput" class="form-label">Adresse email</label>
+                                <input type="email" class="form-control" id="emailInput" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Valider</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Inclure Bootstrap JS et ses dépendances -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Votre code JavaScript -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+          // Afficher le modal après le chargement de la page
+          var infoModal = new bootstrap.Modal(document.getElementById('infoModal'));
+          infoModal.show();
+
+          // Fonction pour vérifier si les champs sont remplis
+          function fieldsAreFilled() {
+              var name = document.getElementById('nameInput').value.trim();
+              var email = document.getElementById('emailInput').value.trim();
+              return name !== "" && email !== "";
+          }
+
+          // Délai de fermeture du modal après 10 secondes si les champs sont remplis
+          setTimeout(function() {
+              if (fieldsAreFilled()) {
+                  infoModal.hide();
+              } else {
+                  console.log("Les informations ne sont pas complètes. Le modal reste ouvert.");
+              }
+          }, 10000); // 10 000 ms = 10 secondes
+
+          // Gestion du formulaire d'informations
+          document.getElementById('infoForm').addEventListener('submit', function(event) {
+              event.preventDefault();
+              if (fieldsAreFilled()) {
+                  var name = document.getElementById('nameInput').value;
+                  var email = document.getElementById('emailInput').value;
+
+                  fetch("{% url 'submit_info' %}", {
+                      method: 'POST',
+                      headers: {
+                          'Content-Type': 'application/x-www-form-urlencoded',
+                          'X-CSRFToken': '{{ csrf_token }}'
+                      },
+                      body: new URLSearchParams({
+                          'name': name,
+                          'email': email
+                      })
+                  })
+                  .then(response => response.json())
+                  .then(data => {
+                      if (data.status === 'success') {
+                          // Fermer le modal après la soumission si les champs sont remplis
+                          infoModal.hide();
+
+                          // Afficher le message de félicitation
+                          var successMessage = document.getElementById('successMessage');
+                          console.log("Affichage du message de succès"); // Debugging
+                          successMessage.style.display = 'block';
+
+                          // Masquer le message après 2 secondes
+                          setTimeout(function() {
+                              successMessage.style.display = 'none';
+                          }, 5000); // 2000 ms = 2 secondes
+                      } else {
+                          alert(data.message);
+                      }
+                  })
+                  .catch(error => {
+                      console.error('Erreur:', error);
+                  });
+              } else {
+                  // Si les champs ne sont pas remplis, afficher un message d'erreur
+                  alert("Veuillez remplir tous les champs avant de soumettre.");
+              }
+          });
+      });
+    </script>
+{% endblock %}

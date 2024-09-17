@@ -1,0 +1,124 @@
+{% extends 'titi/base.html' %}
+
+{% block content %}
+
+{% load static %}
+
+<section class="container mt-5">
+  <div class="text-center mb-5">
+    <h1>Notre Service de Relooking</h1>
+    <p class="lead">Transformez votre style avec nos experts en relooking. Découvrez nos services et prenez rendez-vous pour une consultation personnalisée.</p>
+  </div>
+
+  <!-- Introduction aux Services -->
+  <div class="row g-4">
+    <div class="col-lg-6">
+      <div class="card border-0 shadow-sm">
+        <img src="{% static 'assets/img/relooking1.jpg' %}" class="card-img-top" alt="Service Relooking">
+        <div class="card-body">
+          <h5 class="card-title">Consultation Personnalisée</h5>
+          <p class="card-text">Recevez des conseils de nos experts pour améliorer votre apparence et définir un style qui vous correspond parfaitement.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <div class="card border-0 shadow-sm">
+        <img src="{% static 'assets/img/service.jpg' %}" class="card-img-top" alt="Service de Relooking">
+        <div class="card-body">
+          <h5 class="card-title">Session de Relooking</h5>
+          <p class="card-text">Participez à une session complète de relooking incluant conseils de mode, analyse de garde-robe, et recommandations personnalisées.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section de Tarifs -->
+  <section class="mt-5">
+    <div class="text-center mb-4">
+      <h2>Nos Tarifs</h2>
+      <p class="lead">Découvrez nos tarifs en fonction du temps de séance et choisissez l'option qui vous convient le mieux.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Consultation Express</h5>
+            <p class="card-text">30 minutes de consultation pour des conseils rapides et efficaces.</p>
+            <p class="card-price">€50</p>
+            <form method="POST" action="{% url 'formulaire_rendezvous' %}">
+              {% csrf_token %}
+              <input type="hidden" name="service" value="Consultation Express">
+              <input type="hidden" name="tarif" value="50">
+              <button type="submit" class="btn btn-primary">Prendre rendez-vous</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Session Complète</h5>
+            <p class="card-text">1 heure de consultation complète incluant une analyse détaillée de votre garde-robe.</p>
+            <p class="card-price">€100</p>
+            <form method="POST" action="{% url 'formulaire_rendezvous' %}">
+              {% csrf_token %}
+              <input type="hidden" name="service" value="Session Complète">
+              <input type="hidden" name="tarif" value="100">
+              <button type="submit" class="btn btn-primary">Prendre rendez-vous</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Pack Premium</h5>
+            <p class="card-text">2 heures de consultation avec un suivi personnalisé après la séance.</p>
+            <p class="card-price">€200</p>
+            <form method="POST" action="{% url 'formulaire_rendezvous' %}">
+              {% csrf_token %}
+              <input type="hidden" name="service" value="Pack Premium">
+              <input type="hidden" name="tarif" value="200">
+              <button type="submit" class="btn btn-primary">Prendre rendez-vous</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section de Témoignages -->
+  <section class="bg-light py-5 mt-5">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2>Témoignages</h2>
+        <p class="lead">Découvrez ce que nos clients disent de notre service de relooking.</p>
+      </div>
+      <div class="row">
+        <div class="col-lg-4">
+          <blockquote class="blockquote">
+            <p>"Un service incroyable ! Les conseils reçus m'ont permis de transformer mon style et de me sentir beaucoup mieux dans ma peau."</p>
+            <footer class="blockquote-footer">Alice B.</footer>
+          </blockquote>
+        </div>
+        <div class="col-lg-4">
+          <blockquote class="blockquote">
+            <p>"Une expérience très professionnelle et enrichissante. Les recommandations étaient parfaites et adaptées à mes besoins."</p>
+            <footer class="blockquote-footer">David L.</footer>
+          </blockquote>
+        </div>
+        <div class="col-lg-4">
+          <blockquote class="blockquote">
+            <p>"Le pack premium en vaut vraiment la peine ! Je me suis senti accompagné tout au long du processus et les résultats sont magnifiques."</p>
+            <footer class="blockquote-footer">Emma R.</footer>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+
+{% endblock %}

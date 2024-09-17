@@ -1,0 +1,46 @@
+{% extends 'titi/base.html' %}
+
+{% block content %}
+<section class="container mt-5">
+  <div class="text-center mb-5">
+    <h1>Nos Tarifs</h1>
+    <p class="lead">Découvrez nos tarifs en fonction du temps de séance et choisissez l'option qui vous convient le mieux.</p>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-lg-4">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Consultation Express</h5>
+          <p class="card-text">30 minutes de consultation pour des conseils rapides et efficaces.</p>
+          <p class="card-price">€50</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Session Complète</h5>
+          <p class="card-text">1 heure de consultation complète incluant une analyse détaillée de votre garde-robe.</p>
+          <p class="card-price">€100</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Pack Premium</h5>
+          <p class="card-text">2 heures de consultation avec un suivi personnalisé après la séance.</p>
+          <p class="card-price">€200</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center mt-5">
+    <a href="{% url 'formulaire_rendezvous' %}" class="btn btn-primary">Prendre Rendez-vous</a>
+  </div>
+</section>
+{% endblock %}

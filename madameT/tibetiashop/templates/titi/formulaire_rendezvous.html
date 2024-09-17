@@ -1,0 +1,107 @@
+{% extends 'titi/base.html' %}
+
+{% block content %}
+<section class="container mt-5">
+  <div class="text-center mb-5">
+    <h1>Formulaire de Prise de Rendez-vous</h1>
+    <p class="lead">Remplissez le formulaire ci-dessous pour prendre rendez-vous avec nos experts.</p>
+  </div>
+
+  <!-- Formulaire de prise de rendez-vous -->
+  <form id="rendezvousForm" action="{% url 'soumission_rendezvous' %}" method="post" class="mb-5">
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="name" class="form-label">Nom</label>
+          <input type="text" class="form-control" id="name" name="nom" required>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="mb-3">
+          <label for="phone" class="form-label">Téléphone</label>
+          <input type="tel" class="form-control" id="phone" name="phone" required>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="date" class="form-label">Date du Rendez-vous</label>
+          <input type="date" class="form-control" id="date" name="date" required>
+        </div>
+        <div class="mb-3">
+          <label for="time" class="form-label">Heure du Rendez-vous</label>
+          <input type="time" class="form-control" id="time" name="heure" required>
+        </div>
+        <div class="mb-3">
+          <label for="message" class="form-label">Message</label>
+          <textarea class="form-control" id="message" name="message" rows="3"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Affichage des informations du service -->
+    <div class="row">
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="service" class="form-label">Service Sélectionné</label>
+          <input type="text" class="form-control" id="service" name="service" value="{{ service }}" readonly>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="price" class="form-label">Tarif</label>
+          <input type="text" class="form-control" id="price" name="tarif" value="{{ tarif }}" readonly>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Envoyer</button>
+  </form>
+
+  <!-- Modale de confirmation -->
+  <div class="modal fade" id="thankYouModal" tabindex="-1" aria-labelledby="thankYouModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="thankYouModalLabel">Merci pour votre rendez-vous !</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+        </div>
+        <div class="modal-body">
+          <p><strong>Nom et Prénom :</strong> {{ nom }}</p>
+          <p><strong>Date du Rendez-vous :</strong> {{ date }}</p>
+          <p><strong>Heure du Rendez-vous :</strong> {{ heure }}</p>
+          <p><strong>Service sélectionné :</strong> {{ service }}</p>
+          <p><strong>Tarif :</strong> €{{ tarif }}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="closeModal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Vérifie si la modale doit être affichée
+    {% if show_modal %}
+    var thankYouModal = new bootstrap.Modal(document.getElementById('thankYouModal'));
+    thankYouModal.show();
+
+    // Redirection après la fermeture de la modale
+    document.getElementById('closeModal').addEventListener('click', function() {
+      window.location.href = "{% url 'titi/home' %}"; // Redirige vers la page d'accueil
+    });
+
+    // Écouteur d'événement pour fermer la modale avec la croix
+    document.querySelector('.btn-close').addEventListener('click', function() {
+      window.location.href = "{% url 'titi/home' %}"; // Redirige vers la page d'accueil
+    });
+    {% endif %}
+  });
+</script>
+{% endblock %}

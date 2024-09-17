@@ -1,0 +1,91 @@
+{% extends 'titi/base.html' %}
+{% block content %}
+{% load static %}
+
+<div class="container mt-5"><br><br>
+  <div class="d-flex justify-content-center align-items-center">
+    <h2 class="text-center w-100 p-3" style="letter-spacing: 0.2em; background-color: rgba(255, 255, 255, 0.5);">
+      Bienvenue dans votre boutique en ligne
+    </h2>
+  </div>
+
+  <div class="row">
+    {% for produit in produits %}
+      <div class="col-md-4 col-sm-6 mb-4">
+        <div class="card h-100 shadow-sm">
+          <div class="img-container">
+            <img src="{{ produit.image.url }}" class="card-img-top" alt="{{ produit.nom }}">
+            <div class="img-loupe"></div>
+          </div>
+          <div class="card-body text-center">
+            <h5 class="card-title">{{ produit.nom }}</h5>
+            <span class="badge bg-success mb-3">{{ produit.prix }}€</span>
+            <p class="card-text">{{ produit.description }}</p>
+            <h6 class="card-title">Code produit: {{ produit.code }}</h6>
+            <a href="{% url 'acheter' produit.id %}" class="btn btn-primary">Je passe ma commande</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+  /* Style pour l'effet de zoom */
+  .img-container {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .img-loupe {
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid #333;
+    width: 100px;
+    height: 100px;
+    pointer-events: none;
+    display: none;
+  }
+
+  .card-img-top {
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .card:hover .card-img-top {
+    transform: scale(1.2); /* Zoom général sur l'image */
+  }
+
+  .card:hover .img-loupe {
+    display: block;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const cards = document.querySelectorAll('.card');
+
+    cards.forEach(card => {
+      const img = card.querySelector('.card-img-top');
+      const loupe = card.querySelector('.img-loupe');
+
+      card.addEventListener('mousemove', function(e) {
+        const rect = img.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const offsetX = x / rect.width * 100;
+        const offsetY = y / rect.height * 100;
+
+        img.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        loupe.style.left = `${x - loupe.offsetWidth / 2}px`;
+        loupe.style.top = `${y - loupe.offsetHeight / 2}px`;
+      });
+
+      card.addEventListener('mouseleave', function() {
+        img.style.transformOrigin = 'center center';
+      });
+    });
+  });
+</script>
+
+{% endblock %}
+
